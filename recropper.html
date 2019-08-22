@@ -12,40 +12,46 @@
 </head>
 <body style="background: #eee">
 
-<button id="replaceImg" class="l-btn">更换图片</button>
+<!--<button id="replaceImg" class="l-btn">更换图片</button>-->
 <div style="width: 320px;height: 320px;border: solid 1px #555;padding: 5px;margin-top: 10px">
     <img id="finalImg" src="" width="100%">
 </div>
+
+<label title="上传图片" for="chooseImg" class="l-btn choose-btn" id="replaceImg">
+    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
+    选择图片
+</label>
 
 
 <!--图片裁剪框 start-->
 <div style="display: none" class="tailoring-container">
     <div class="black-cloth" onclick="closeTailor(this)"></div>
     <div class="tailoring-content">
-            <div class="tailoring-content-one">
-                <label title="上传图片" for="chooseImg" class="l-btn choose-btn">
-                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onchange="selectImg(this)">
-                    选择图片
-                </label>
-                <div class="close-tailoring"  onclick="closeTailor(this)">×</div>
+        <!--<div class="tailoring-content-one">-->
+
+            <!--<div class="close-tailoring"  onclick="closeTailor(this)">×</div>-->
+        <!--</div>-->
+        <div class="tailoring-content-two">
+            <div class="tailoring-box-parcel">
+                <img id="tailoringImg">
             </div>
-            <div class="tailoring-content-two">
-                <div class="tailoring-box-parcel">
-                    <img id="tailoringImg">
-                </div>
-                <div class="preview-box-parcel">
-                    <p>图片预览：</p>
-                    <div class="square previewImg"></div>
-                    <div class="circular previewImg"></div>
-                </div>
+            <div class="preview-box-parcel">
+                <p>图片预览：</p>
+                <div class="square previewImg"></div>
+                <div class="circular previewImg"></div>
             </div>
-            <div class="tailoring-content-three">
+        </div>
+        <div class="tailoring-content-three">
+            <button class="l-btn cancel" onclick="closeTailor(this)">取消</button>
+            <div class="operation">
                 <button class="l-btn cropper-reset-btn">复位</button>
                 <button class="l-btn cropper-rotate-btn">旋转</button>
                 <button class="l-btn cropper-scaleX-btn">换向</button>
-                <button class="l-btn sureCut" id="sureCut">确定</button>
             </div>
+
+            <button class="l-btn sureCut" id="sureCut">确定</button>
         </div>
+    </div>
 </div>
 <!--图片裁剪框 end-->
 
@@ -71,12 +77,11 @@
         }
     })();
 
-    //弹出图片裁剪框
-    $("#replaceImg").on("click",function () {
-        $(".tailoring-container").toggle();
-    });
     //图像上传
     function selectImg(file) {
+        //弹出图片裁剪框
+        $(".tailoring-container").toggle();
+
         if (!file.files || !file.files[0]){
             return;
         }
